@@ -4,7 +4,7 @@ body {
   background-color: rgb(219, 229, 237);
   display: flex;
   justify-content: center;
-  font-family: 'Trebuchet MS', Arial, sans-serif;
+  font-family: "Trebuchet MS", Arial, sans-serif;
 }
 
 .app {
@@ -34,5 +34,14 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  border-bottom: rgba(0, 0, 0, 0.05) 1px solid;
+  border-bottom: rgba(17, 13, 13, 0.08) 2px solid;
+}
+
+/* List Item */
+
+.list-item {
+  width: 100%;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0 0 0 1px;
 }
