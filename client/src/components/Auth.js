@@ -21,7 +21,7 @@ const Auth = () => {
       setError("Make sure passwords match!");
       return;
     }
-    try {
+  
       const response = await fetch(
         `${process.env.REACT_APP_SERVERURL}/${endpoint}`,
         {
@@ -39,9 +39,6 @@ const Auth = () => {
 
         window.location.reload();
       }
-    } catch (err) {
-      console.log("failed");
-    }
   };
 
   return (
