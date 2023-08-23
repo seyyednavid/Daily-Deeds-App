@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import ListHeader from "./components/ListHeader";
 import ListItem from "./components/ListItem";
+import Auth from "./components/Auth";
 const App = () => {
+  const userEmail = "navidhejazi68@yahoo.com";
   const [tasks, setTasks] = useState(null);
 
+  const authToken = false;
+
   const getData = async () => {
-    const userEmail = "navidhejazi68@yahoo.com";
     try {
       const response = await fetch(
         `${process.env.REACT_APP_SERVERURL}/todos/${userEmail}`
@@ -16,7 +19,6 @@ const App = () => {
       console.error(error);
     }
   };
-
   useEffect(() => getData, []);
 
   //Sort by date
@@ -24,10 +26,15 @@ const App = () => {
 
   return (
     <div className="app">
-      <ListHeader listName={"🌴 holiday tick list"} getData={getData} />
-      {sortTasks?.map((task) => (
-        <ListItem key={task.id} task={task} getData={getData} />
-      ))}
+      {!authToken && <Auth />}
+      {authToken && (
+        <>
+          <ListHeader listName={"🌴 holiday tick list"} getData={getData} />
+          {sortTasks?.map((task) => (
+            <ListItem key={task.id} task={task} getData={getData} />
+          ))}
+        </>
+      )}
     </div>
   );
 };
