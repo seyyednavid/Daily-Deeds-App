@@ -6,6 +6,8 @@ const app = express();
 const pool = require("./db");
 app.use(cors());
 app.use(express.json());
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // Get all todos
 app.get("/todos/:userEmail", async (req, res) => {
@@ -52,15 +54,35 @@ app.put("/todos/:id", async (req, res) => {
 });
 
 //Delete a todo
-app.delete("/todos/:id", async(req,res) => {
-  const {id} = req.params
+app.delete("/todos/:id", async (req, res) => {
+  const { id } = req.params;
   try {
-    const deleteToDo = await pool.query("DELETE FROM todos WHERE id=$1", [id])
-    res.json(deleteToDo)
+    const deleteToDo = await pool.query("DELETE FROM todos WHERE id=$1", [id]);
+    res.json(deleteToDo);
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
-})
+});
+
+// Signup
+app.post("/signup", async (req, res) => {
+  const { email, password } = req.body;
+  const salt = bcrypt.genSaltSync(10);
+  const hashedPassword = bcrypt.hashSync(password, salt);
+  try {
+    const signUp = await pool.query(
+      "INSERT INTO users (email, hashed_Password) VALUES ($1,$2)",
+      [email, hashedPassword]
+    );
+    const token = jwt.sign({ email }, "secret", { expiresIn: "1hr" });
+    res.json({ email, token });
+  } catch (err) {
+    console.error(err);
+    if (err) {
+      res.json({ detail: err.detail });
+    }
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server is runnig on PORT ${PORT}`);
