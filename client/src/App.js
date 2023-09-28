@@ -20,6 +20,8 @@ const App = () => {
       console.error(error);
     }
   };
+
+  
   useEffect(() => {
     if (authToken) {
       getData();
@@ -41,7 +43,6 @@ const App = () => {
           ))}
         </>
       )}
-      <p className="copyright"> &copy; Creative Coding LLC</p>
     </div>
   );
 };
