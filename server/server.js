@@ -100,7 +100,7 @@ app.post("/login", async (req, res) => {
       res.json({detail: "Please check your email and password"})
     }
   } catch (error) {
-    
+    console.log(err);
   }
  
 });

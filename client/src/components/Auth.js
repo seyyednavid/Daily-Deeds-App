@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useCookies } from "react-cookie";
+import tickPic from "../assets/tick.png"
 const Auth = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null);
   const [isLogIn, setIsLogIn] = useState(true);
@@ -8,7 +9,6 @@ const Auth = () => {
   const [confirmPassword, setConfirmPassword] = useState(null);
   const [error, setError] = useState(null);
 
-  console.log(cookies);
 
   const viewLogin = (status) => {
     setError(null);
@@ -42,6 +42,11 @@ const Auth = () => {
   };
 
   return (
+    <>
+    <div className="header-auth">
+      <img  src={tickPic} alt="tick pic" />
+    <h2>Daily Deeds</h2>
+    </div>
     <div className="auth-container">
       <div className="auth-container-box">
         <form>
@@ -77,7 +82,7 @@ const Auth = () => {
             style={{
               backgroundColor: !isLogIn
                 ? "rgb(255,255,255)"
-                : "rgb(180,180,180)",
+                : "rgb(241, 240, 232)",
             }}
           >
             Sign Up
@@ -87,7 +92,7 @@ const Auth = () => {
             style={{
               backgroundColor: isLogIn
                 ? "rgb(255,255,255)"
-                : "rgb(180,180,180)",
+                : "rgb(241, 240, 232)",
             }}
           >
             Login
@@ -95,6 +100,7 @@ const Auth = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
