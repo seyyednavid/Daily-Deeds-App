@@ -247,6 +247,10 @@ input:focus {
   border-radius: 7px;
   overflow: hidden;
 }
+.progress-value {
+margin-left: 0.25rem;
+font-size: 14px;
+}
 
 .inner-bar {
   height: 14px;
@@ -263,7 +267,7 @@ input:focus {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 810px) {
   .list-item {
     flex-direction: column;
   }

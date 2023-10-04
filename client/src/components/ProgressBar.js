@@ -14,12 +14,15 @@ const ProgressBar = ({ progress }) => {
   ];
   const randomColor = colors[Math.floor(Math.random() * colors.length)]
   return (
+    <>
     <div className="outer-bar">
       <div
         className="inner-bar"
         style={{ width: `${progress}%`, backgroundColor: randomColor }}
       ></div>
     </div>
+    <span className="progress-value">{progress}%</span>
+    </>
   );
 };
 
