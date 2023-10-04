@@ -10,7 +10,7 @@ The project is deployed on Render.com(frontend and backend) and vercel.com(postg
 The primary goal of  Daily Deeds app is to empower users to efficiently manage their daily tasks, track progress, and enhance productivity.
 
 # Features :
-User Authentication : Allow users to register and log in securely to create their own accounts. User authentication ensures that each user has a personalized experience and can access their tasks privately. <br />
+User Authentication: Allow users to register and log in securely to create their own accounts. User authentication ensures that each user has a personalized experience and can access their tasks privately. <br />
 
 Task Management: Enable users to add, edit, and remove tasks from their to-do lists. <br />
 
