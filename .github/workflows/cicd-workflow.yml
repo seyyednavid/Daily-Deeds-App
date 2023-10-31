@@ -19,11 +19,11 @@ jobs:
       - name: Build and push client Docker image
         working-directory: ./client
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/client:$GITHUB_SHA .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/client:$GITHUB_SHA
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/dailydeeds_client:$GITHUB_SHA .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/dailydeeds_client:$GITHUB_SHA
 
       - name: Build and push server Docker image
         working-directory: ./server
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/server:$GITHUB_SHA .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/server:$GITHUB_SHA
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/dailydeeds_server:$GITHUB_SHA .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/dailydeeds_server:$GITHUB_SHA
