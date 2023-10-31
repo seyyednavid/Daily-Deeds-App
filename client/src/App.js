@@ -21,30 +21,32 @@ const App = () => {
     }
   };
 
-  
   useEffect(() => {
     if (authToken) {
       getData();
     }
   }, []);
 
-  //Sort by date
-  const sortTasks = tasks?.sort((a, b) => new Date(a.date) - new Date(b.date));
-
   return (
     <div className="whole-app">
-    <div className="app">
-      {!authToken && <Auth />}
-      {authToken && (
-        <>
-          <ListHeader listName={"📝 Your Daily Deeds List"} getData={getData} />
-          <p className="user-email"> 💫 Welcome back <span>{userEmail}</span></p>
-          {sortTasks?.map((task) => (
-            <ListItem key={task.id} task={task} getData={getData} />
-          ))}
-        </>
-      )}
-    </div>
+      <div className="app">
+        {!authToken && <Auth />}
+        {authToken && (
+          <>
+            <ListHeader
+              listName={"📝 Your Daily Deeds List"}
+              getData={getData}
+            />
+            <p className="user-email">
+              {" "}
+              💫 Welcome back <span>{userEmail}</span>
+            </p>
+            {tasks?.map((task) => (
+              <ListItem key={task.id} task={task} getData={getData} />
+            ))}
+          </>
+        )}
+      </div>
     </div>
   );
 };

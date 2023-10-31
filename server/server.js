@@ -17,7 +17,10 @@ app.get("/todos/:userEmail", async (req, res) => {
       "SELECT * FROM todos WHERE user_email = $1",
       [userEmail]
     );
-    res.json(getToDo.rows);
+    const getToDos = getToDo.rows?.sort(
+      (a, b) => new Date(a.date) - new Date(b.date)
+    );
+    res.json(getToDos);
   } catch (err) {
     console.error(err);
   }
@@ -88,21 +91,25 @@ app.post("/signup", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
-    const users = await pool.query('SELECT * FROM users WHERE email=$1', [email])
-    if(!users.rows.length) {
-      return res.json({detail: 'User does not exist!'})
+    const users = await pool.query("SELECT * FROM users WHERE email=$1", [
+      email,
+    ]);
+    if (!users.rows.length) {
+      return res.json({ detail: "User does not exist!" });
     }
-    const success = await bcrypt.compare(password, users.rows[0].hashed_password)
+    const success = await bcrypt.compare(
+      password,
+      users.rows[0].hashed_password
+    );
     const token = jwt.sign({ email }, "secret", { expiresIn: "1hr" });
-    if(success){
-      res.json({email: users.rows[0].email, token })
+    if (success) {
+      res.json({ email: users.rows[0].email, token });
     } else {
-      res.json({detail: "Please check your email and password"})
+      res.json({ detail: "Please check your email and password" });
     }
   } catch (error) {
     console.log(err);
   }
- 
 });
 
 app.listen(PORT, () => {
