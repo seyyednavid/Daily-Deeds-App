@@ -1,0 +1,32 @@
+version: '3'
+services:
+  server:
+    build:
+      context: ./server
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST="postgres://default:2WQUmkHiT8PA@ep-billowing-smoke-08031426-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb"
+      - DB_PORT=5432
+      - DB_USER=seyyednavidhejazijouybari
+      - DB_PASSWORD=123qwe@A
+      - DB_NAME=localhost
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: seyyednavidhejazijouybari
+      POSTGRES_PASSWORD: 123qwe@A
+      POSTGRES_DB: localhost
+    ports:
+      - "5432:5432"
+
+  react-app:
+    build:
+      context: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
