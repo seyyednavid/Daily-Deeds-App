@@ -10,16 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
+      
       - name: Create .env file
         run: |
-          echo "DATABASE_HOST=$DATABASE_HOST" >> ../.env
-          echo "DATABASE_PORT=$DATABASE_PORT" >> ../.env
-          echo "DATABASE_USER=$DATABASE_USER" >> ../.env
-          echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> ../.env
-          echo "DATABASE_NAME=$DATABASE_NAME" >> ../.env
+          echo "DATABASE_HOST=$DATABASE_HOST" >> .env
+          echo "DATABASE_PORT=$DATABASE_PORT" >> .env
+          echo "DATABASE_USER=$DATABASE_USER" >> .env
+          echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> .env
+          echo "DATABASE_NAME=$DATABASE_NAME" >> .env
+
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Login to Docker Hub
         run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
@@ -47,29 +48,29 @@ jobs:
           docker_version: 'latest'
 
       - name: Connect to EC2
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-2 
+          aws-region: eu-west-2
 
       - name: Upload Docker Compose file
         uses: actions/upload-artifact@v3
         with:
           name: docker-compose.yaml
-          path: ../docker-compose.yaml
+          path: docker-compose.yaml
 
       - name: Upload .env file
         uses: actions/upload-artifact@v3
         with:
           name: .env
-          path: ../.env
+          path: .env
 
       - name: Down existing Docker images
-        run: docker-compose -f ../docker-compose.yaml down
+        run: docker-compose down
 
       - name: Up new Docker images
-        run: docker-compose -f ../docker-compose.yaml up -d
+        run: docker-compose up -d
 
 
 
