@@ -9,15 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Create .env file
-        run: |
-          echo "DATABASE_HOST=$DATABASE_HOST" >> .env
-          echo "DATABASE_PORT=$DATABASE_PORT" >> .env
-          echo "DATABASE_USER=$DATABASE_USER" >> .env
-          echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> .env
-          echo "DATABASE_NAME=$DATABASE_NAME" >> .env
-
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -41,42 +32,30 @@ jobs:
     needs: build
 
     steps:
+
       - name: Checkout source code
         uses: actions/checkout@v2
-      
+
       - name: Use SSH to deploy
-        uses: git
+        uses: github/ssh-action@latest
         with:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # Copy the docker-compose and .env files to the EC2 instance
-           scp -i ${{ secrets.EC2_SSH_KEY }} docker-compose.yml .env <span class="math-inline">\{\{ secrets\.USERNAME \}\}@</span>{{ secrets.HOST_DNS }}:
+            # Copy the docker-compose file to the EC2 instance
+            scp -i ${{ secrets.EC2_SSH_KEY }} docker-compose.yml ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:
 
             # Down the previous docker-compose configuration
-            sudo docker-compose down -v
+            ssh ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} "sudo docker-compose down -v"
 
             # Up the new docker-compose configuration
-            sudo docker-compose up -d
+            ssh ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} "sudo docker-compose up -d"
+      
+   
+              
 
-
-      # - name: Deploy to Server 1
-      #   uses: easingthemes/ssh-deploy@main
-      #   with:
-      #     ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
-      #     remote-host: ${{ secrets.HOST_DNS }}
-      #     remote-user: ${{ secrets.USERNAME }}
-      #     local-path: .env docker-compose.yaml  
-      #     remote-path: ${{ secrets.TARGET_DIR }}  
-
-      # - name: Connect to EC2 and manage Docker containers
-      #   run: |
-      #     ssh -i ${{ secrets.EC2_SSH_KEY }} ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} << EOF
-      #       cd ${{ secrets.TARGET_DIR }}
-      #       docker-compose down
-      #       docker-compose up -d
-      #     EOF
+  
 
            
 

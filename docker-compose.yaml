@@ -5,11 +5,16 @@ services:
     ports:
       - "80:8000"
     environment:
-      - DB_HOST=$DATABASE_HOST
-      - DB_PORT=$DATABASE_PORT
-      - DB_USER=$DATABASE_USER
-      - DB_PASSWORD=$DATABASE_PASSWORD
-      - DB_NAME=$DATABASE_NAME
+      - DB_HOST="postgres://default:2WQUmkHiT8PA@ep-billowing-smoke-08031426-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb"
+      - DB_PORT=5432
+      - DB_USER=seyyednavidhejazijouybari
+      - DB_PASSWORD=123qwe@A
+      - DB_NAME=localhost
+      # - DB_HOST=$DATABASE_HOST
+      # - DB_PORT=$DATABASE_PORT
+      # - DB_USER=$DATABASE_USER
+      # - DB_PASSWORD=$DATABASE_PASSWORD
+      # - DB_NAME=$DATABASE_NAME
     depends_on:
       - postgres
 
