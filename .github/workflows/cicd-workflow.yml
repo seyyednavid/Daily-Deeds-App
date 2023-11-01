@@ -46,7 +46,8 @@ jobs:
         #   username: ${{ secrets.USERNAME }}
         #   key: ${{ secrets.EC2_SSH_KEY }}
         run: |
-         ls
+          echo "$SSH_KEY" >> secret.pem
+          ls
               
 
   
