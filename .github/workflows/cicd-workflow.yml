@@ -5,28 +5,28 @@ on:
     branches:
       - master
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  # build:
+  #   runs-on: ubuntu-latest
 
-    steps:
+  #   steps:
 
-      - name: Checkout code
-        uses: actions/checkout@v3
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
 
-      - name: Login to Docker Hub
-        run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+  #     - name: Login to Docker Hub
+  #       run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-      - name: Build and push client Docker image
-        working-directory: ./client
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/dailydeeds_client:latest .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/dailydeeds_client:latest
+  #     - name: Build and push client Docker image
+  #       working-directory: ./client
+  #       run: |
+  #         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/dailydeeds_client:latest .
+  #         docker push ${{ secrets.DOCKERHUB_USERNAME }}/dailydeeds_client:latest
 
-      - name: Build and push server Docker image
-        working-directory: ./server
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/dailydeeds_server:latest .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/dailydeeds_server:latest
+  #     - name: Build and push server Docker image
+  #       working-directory: ./server
+  #       run: |
+  #         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/dailydeeds_server:latest .
+  #         docker push ${{ secrets.DOCKERHUB_USERNAME }}/dailydeeds_server:latest
 
   deploy:
     runs-on: ubuntu-latest
