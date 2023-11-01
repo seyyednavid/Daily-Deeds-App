@@ -44,7 +44,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "docker-compose.yaml"
-          target: "/"
+          target: "~/"
 
       - name: Use SSH to deploy
         env:
