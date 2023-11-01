@@ -46,20 +46,29 @@ jobs:
           source: "docker-compose.yaml"
           target: "~/"
 
-      - name: Use SSH to deploy
-        env:
-          SSH_KEY: ${{secrets.EC2_SSH_KEY}}
-        # uses: github/ssh-action@latest
-        # with:
-        #   host: ${{ secrets.HOST_DNS }}
-        #   username: ${{ secrets.USERNAME }}
-        #   key: ${{ secrets.EC2_SSH_KEY }}
-        run: |
-          echo "$SSH_KEY" >> secret.pem
-          chmod 777 secret.pem
-          cat secret.pem
-          scp -i  secret.pem docker-compose.yaml  ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:~
-          ls
+      - name: EC2 SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{  secrets.EC2_SSH_KEY }}
+          script: |
+            docker-compose up
+
+      # - name: Use SSH to deploy
+      #   env:
+      #     SSH_KEY: ${{secrets.EC2_SSH_KEY}}
+      #   # uses: github/ssh-action@latest
+      #   # with:
+      #   #   host: ${{ secrets.HOST_DNS }}
+      #   #   username: ${{ secrets.USERNAME }}
+      #   #   key: ${{ secrets.EC2_SSH_KEY }}
+      #   run: |
+      #     echo "$SSH_KEY" >> secret.pem
+      #     chmod 777 secret.pem
+      #     cat secret.pem
+      #     scp -i  secret.pem docker-compose.yaml  ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:~
+          # ls
               
 
   
