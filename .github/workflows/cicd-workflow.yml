@@ -46,7 +46,8 @@ jobs:
         run: |
           # Copy the docker-compose file to the EC2 instance
           # scp -i ${{ secrets.EC2_SSH_KEY }} docker-compose.yml ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:
-          scp -i ${{ secrets.EC2_SSH_KEY }} docker-compose.yaml  ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:~
+          echo ${{ secrets.EC2_SSH_KEY }} > secret.pem
+          scp -i  "secret.pem" docker-compose.yaml  ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:~
           # Down the previous docker-compose configuration
           # ssh ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} "sudo docker-compose down -v"
 
