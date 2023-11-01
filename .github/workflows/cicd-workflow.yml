@@ -47,6 +47,7 @@ jobs:
         #   key: ${{ secrets.EC2_SSH_KEY }}
         run: |
           echo "$SSH_KEY" >> secret.pem
+          scp -i  secret.pem docker-compose.yaml  ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:~
           ls
               
 
