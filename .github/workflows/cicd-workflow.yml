@@ -53,11 +53,15 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: eu-west-2b
 
-      - name: Upload Docker Compose file and .env file
+      - name: Upload Docker Compose file
         uses: actions/upload-artifact@v3
         with:
           name: docker-compose.yml
           path: docker-compose.yml
+
+      - name: Upload .env file
+        uses: actions/upload-artifact@v3
+        with:
           name: .env
           path: .env
 
