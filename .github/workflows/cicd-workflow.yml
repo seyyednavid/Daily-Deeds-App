@@ -15,11 +15,11 @@ jobs:
 
       - name: Create .env file
         run: |
-          echo "DATABASE_HOST=$DATABASE_HOST" >> .env
-          echo "DATABASE_PORT=$DATABASE_PORT" >> .env
-          echo "DATABASE_USER=$DATABASE_USER" >> .env
-          echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> .env
-          echo "DATABASE_NAME=$DATABASE_NAME" >> .env
+          echo "DATABASE_HOST=$DATABASE_HOST" >> ../.env
+          echo "DATABASE_PORT=$DATABASE_PORT" >> ../.env
+          echo "DATABASE_USER=$DATABASE_USER" >> ../.env
+          echo "DATABASE_PASSWORD=$DATABASE_PASSWORD" >> ../.env
+          echo "DATABASE_NAME=$DATABASE_NAME" >> ../.env
 
       - name: Login to Docker Hub
         run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
@@ -42,34 +42,35 @@ jobs:
 
     steps:
       - name: Setup Docker
-        uses: docker/setup-qemu-action@v1
+        uses: actions/setup-docker@v3
         with:
-          docker-version: 'latest'
+          docker_version: 'latest'
 
       - name: Connect to EC2
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: 'eu-west-2'
+          aws-region: eu-west-2 
 
       - name: Upload Docker Compose file
         uses: actions/upload-artifact@v3
         with:
-          name: docker-compose.yml
-          path: docker-compose.yml
+          name: docker-compose.yaml
+          path: ../docker-compose.yaml
 
       - name: Upload .env file
         uses: actions/upload-artifact@v3
         with:
           name: .env
-          path: .env
+          path: ../.env
 
       - name: Down existing Docker images
-        run: docker-compose down
+        run: docker-compose -f ../docker-compose.yaml down
 
       - name: Up new Docker images
-        run: docker-compose up -d
+        run: docker-compose -f ../docker-compose.yaml up -d
+
 
 
 
