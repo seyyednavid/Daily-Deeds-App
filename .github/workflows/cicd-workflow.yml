@@ -41,16 +41,29 @@ jobs:
     needs: build
 
     steps:
-      - name: Setup SSH connection
-        uses: webfactory/ssh-agent@v0.4.1
+      - name: Deploy to Server 1
+        uses: easingthemes/ssh-deploy@main
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Copy .env and docker-compose.yaml to EC2
-        run: scp -i ${{ secrets.SSH_PRIVATE_KEY }} .env docker-compose.yaml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOSTNAME }}:/app/
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+          remote-host: ${{ secrets.HOST_DNS }}
+          remote-user: ${{ secrets.USERNAME }}
+          local-path: .env docker-compose.yaml  
+          remote-path: ${{ secrets.TARGET_DIR }}  
 
       - name: Connect to EC2 and manage Docker containers
-        run: ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOSTNAME }} "cd /app/ && docker-compose down && docker-compose up -d"
+        run: |
+          ssh -i ${{ secrets.EC2_SSH_KEY }} ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }} << EOF
+            cd ${{ secrets.TARGET_DIR }}
+            docker-compose down
+            docker-compose up -d
+          EOF
+
+
+      # - name: Copy .env and docker-compose.yaml to EC2
+      #   run: scp -i ${{ secrets.SSH_PRIVATE_KEY }} .env docker-compose.yaml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOSTNAME }}:/app/
+
+      # - name: Connect to EC2 and manage Docker containers
+      #   run: ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOSTNAME }} "cd /app/ && docker-compose down && docker-compose up -d"
 
 # name: Build and Deploy Docker Images to EC2
 
