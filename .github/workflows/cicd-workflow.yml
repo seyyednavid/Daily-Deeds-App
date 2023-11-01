@@ -42,16 +42,16 @@ jobs:
 
     steps:
       - name: Setup Docker
-        uses: actions/setup-docker@v3
+        uses: docker/setup-qemu-action@v1
         with:
-          docker_version: 'latest'
+          docker-version: 'latest'
 
       - name: Connect to EC2
-        uses: actions/aws-cli@v3
+        uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          region: eu-west-2b
+          aws-region: 'eu-west-2b'
 
       - name: Upload Docker Compose file
         uses: actions/upload-artifact@v3
@@ -70,6 +70,7 @@ jobs:
 
       - name: Up new Docker images
         run: docker-compose up -d
+
 
 
 
