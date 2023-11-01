@@ -5,13 +5,6 @@ on:
     branches:
       - master
 
-name: Build and Deploy Docker Images to EC2
-
-on:
-  push:
-    branches:
-      - master
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -77,6 +70,7 @@ jobs:
 
       - name: Up new Docker images
         run: docker-compose up -d
+
 
 
 
