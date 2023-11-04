@@ -42,7 +42,7 @@ networks:
   my-network:
 
 
-# ---------------locally
+# locally
 # version: "3.3"
 
 # services:

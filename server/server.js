@@ -90,6 +90,7 @@ app.post("/signup", async (req, res) => {
 //Login
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  console.log("hil");
   try {
     const users = await pool.query("SELECT * FROM users WHERE email=$1", [
       email,
@@ -108,7 +109,7 @@ app.post("/login", async (req, res) => {
       res.json({ detail: "Please check your email and password" });
     }
   } catch (error) {
-    console.log(err);
+    console.log(error);
   }
 });
 
