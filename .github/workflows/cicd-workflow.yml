@@ -9,13 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Set REACT_APP_SERVERURL
         run: |
-          echo 'REACT_APP_SERVERURL=http://ec2-13-41-187-134.eu-west-2.compute.amazonaws.com:8000' > .env
+          echo 'REACT_APP_SERVERURL=${{REACT_APP_SERVERURL_SECRET}}' > .env
         working-directory: ./client
 
       - name: Login to Docker Hub
@@ -38,7 +37,6 @@ jobs:
     needs: build
 
     steps:
-
       - name: Checkout source code
         uses: actions/checkout@v3
 
@@ -76,15 +74,7 @@ jobs:
       #     chmod 777 secret.pem
       #     cat secret.pem
       #     scp -i  secret.pem docker-compose.yaml  ${{ secrets.USERNAME }}@${{ secrets.HOST_DNS }}:~
-          # ls
-              
-
-  
-
-           
-
-
-
+      # ls
 
       # - name: Copy .env and docker-compose.yaml to EC2
       #   run: scp -i ${{ secrets.SSH_PRIVATE_KEY }} .env docker-compose.yaml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOSTNAME }}:/app/
@@ -104,7 +94,7 @@ jobs:
 #     runs-on: ubuntu-latest
 
 #     steps:
-      
+
 #       - name: Create .env file
 #         run: |
 #           echo "DATABASE_HOST=$DATABASE_HOST" >> .env
@@ -165,12 +155,6 @@ jobs:
 
 #       - name: Up new Docker images
 #         run: docker-compose up -d
-
-
-
-
-
-
 
 # name: Build and Deploy Docker Images
 
