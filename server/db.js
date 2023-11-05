@@ -1,17 +1,6 @@
 const { Pool } = require("pg");
 require("dotenv").config();
 
-// const pool = new Pool({
-//   user: "seyyednavidhejazijouybari",
-//   password: "kameli123@A",
-//   database: "dailydeeds",
-//   host: 'localhost',
-//   port: 5432
-// });
-
-// module.exports = pool;
-
-
 const pool = new Pool({
   user: "docker",
   password: "12345",
@@ -22,6 +11,15 @@ const pool = new Pool({
 
 module.exports = pool;
 
+// const pool = new Pool({
+//   user: "seyyednavidhejazijouybari",
+//   password: "kameli123@A",
+//   database: "dailydeeds",
+//   host: 'localhost',
+//   port: 5432
+// });
+
+// module.exports = pool;
 
 
 
