@@ -21,9 +21,7 @@ jobs:
       
       - name: Debug environment variables
         run: |
-          echo "REACT_APP_SERVERURL = $REACT_APP_SERVERURL"
-        env:
-          REACT_APP_SERVERURL: ${{ secrets.DATABASE_USER }}
+          env
 
       - name: Login to Docker Hub
         run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
