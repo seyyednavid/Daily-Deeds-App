@@ -13,14 +13,14 @@ const Auth = () => {
     setError(null);
     setIsLogIn(status);
   };
-  console.log(`${process.env.REACT_APP_SERVERURL}`);
+
   const handleSubmit = async (e, endpoint) => {
     e.preventDefault();
     if (!isLogIn && password !== confirmPassword) {
       setError("Make sure passwords match!");
       return;
     }
-    console.log(`${process.env.REACT_APP_SERVERURL}/${endpoint}`);
+
     const response = await fetch(
       `${process.env.REACT_APP_SERVERURL}/${endpoint}`,
       {

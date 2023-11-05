@@ -71,7 +71,6 @@ app.delete("/todos/:id", async (req, res) => {
 // Signup
 app.post("/signup", async (req, res) => {
   const { email, password } = req.body;
-  console.log("signup");
   const salt = bcrypt.genSaltSync(10);
   const hashedPassword = bcrypt.hashSync(password, salt);
   try {
@@ -92,8 +91,6 @@ app.post("/signup", async (req, res) => {
 //Login
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  console.log("login");
-  console.log("hil");
   try {
     const users = await pool.query("SELECT * FROM users WHERE email=$1", [
       email,
