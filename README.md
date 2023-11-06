@@ -26,7 +26,7 @@ Job 1 - Frontend and Backend Docker Images: This job has two steps:<br />
 &nbsp;&nbsp;&nbsp; Step 2: Create a Docker image for the backend using the Dockerfile and push it to Docker Hub.<br />
 AWS Deployment: After the Docker images are pushed to Docker Hub, set up an AWS EC2 instance and deploy the app as follows:<br />
 Job 2 - Deploy to AWS EC2:<br />
-&nbsp;&nbsp;&nbsp;Step 1: Copy the provided Docker Compose file to your AWS EC2 instance.<br />
+&nbsp;&nbsp;&nbsp; Step 1: Copy the provided Docker Compose file to your AWS EC2 instance.<br />
 &nbsp;&nbsp;&nbsp; Step 2: Run the app on AWS using Docker Compose. The Docker Compose file orchestrates the frontend, backend, database containers.
 
 # Demo:
