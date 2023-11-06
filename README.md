@@ -12,31 +12,24 @@ The DailyDeeds app is a full-stack application that provides users with the tool
 The primary goal of DailyDeeds is to empower users to efficiently manage their daily tasks, track progress, and enhance productivity. With user authentication, task management, and progress tracking, the app offers a comprehensive solution for staying organized and on top of daily responsibilities.
 
 # Deployment 1 : 
-[App_Link](https://todoapp-client-kcd5.onrender.com/)<br />
 DailyDeeds is deployed using a combination of services:<br />
 ***Frontend:*** Hosted on Render.com for reliable and scalable hosting.<br />
 ***Backend:*** Also hosted on Render.com for high availability and performance.<br />
 ***Database:*** PostgreSQL is hosted on Vercel.com, offering a secure and scalable database hosting solution.<br />
+[App_Link](https://todoapp-client-kcd5.onrender.com/)<br />
 
 # Deployment 2: 
 ***GitHub Actions Workflow, Docker and AWS Deployment***<br />
-
-***GitHub Actions Workflow:*** A GitHub Actions workflow has been configured with two jobs:<br />
-
+GitHub Actions Workflow: A GitHub Actions workflow has been configured with two jobs:<br />
 Job 1 - Frontend and Backend Docker Images: This job has two steps:<br />
-
-   Step 1: Create a Docker image for the frontend using the provided Dockerfile and push it to Docker Hub.<br />
-   Step 2: Create a Docker image for the backend using the Dockerfile and push it to Docker Hub.<br />
-
+    Step 1: Create a Docker image for the frontend using the provided Dockerfile and push it to Docker Hub.<br />
+    Step 2: Create a Docker image for the backend using the Dockerfile and push it to Docker Hub.<br />
 AWS Deployment: After the Docker images are pushed to Docker Hub, set up an AWS EC2 instance and deploy the app as follows:<br />
-
 Job 2 - Deploy to AWS EC2:<br />
-
-Step 1: Copy the provided Docker Compose file to your AWS EC2 instance.<br />
-Step 2: Run the app on AWS using Docker Compose. The Docker Compose file orchestrates the frontend, backend, database containers.
+    Step 1: Copy the provided Docker Compose file to your AWS EC2 instance.<br />
+    Step 2: Run the app on AWS using Docker Compose. The Docker Compose file orchestrates the frontend, backend, database containers.
 
 # Demo:
-
 https://github.com/seyyednavid/Daily-Deeds-App/assets/100324062/ea686ae9-bf76-4ca6-8d86-01a7430f7191
 
 
