@@ -1,21 +1,47 @@
-# Daily Deeds - create a Full Stack app
+# DailyDeeds - Full Stack Task Management App
+The DailyDeeds app is a full-stack application that provides users with the tools to efficiently manage their daily tasks, track progress, and enhance productivity. It is designed to streamline daily task management and boost personal organization. Here's a breakdown of the key features and deployment details for DailyDeeds:
 
-# Overview :
-This is a web-based application built using React, Node.js(Express, pg, jsonwebtoken)and postgresql.
+# User Stories
+1 - User Registration and Login: Users can create accounts, log in securely, and access their personalized dashboard.<br />
+2 - Task Management: Users can add, edit, and delete tasks from their to-do lists.<br />
+3- Progress Tracking: Visualize task progress using a progress bar, helping users monitor their accomplishments.<br />
+4 - User-Friendly Interface: The app boasts an intuitive and user-friendly design that simplifies navigation, task management, and progress tracking.<br />
+5 - Responsive Design: DailyDeeds is responsive, adapting to various screen sizes and devices, ensuring accessibility on desktops, tablets, and mobiles.<br />
 
-# Deployment :
-The project is deployed on Render.com(frontend and backend) and vercel.com(postgresql). 
+# Project Goal
+The primary goal of DailyDeeds is to empower users to efficiently manage their daily tasks, track progress, and enhance productivity. With user authentication, task management, and progress tracking, the app offers a comprehensive solution for staying organized and on top of daily responsibilities.
 
-# Project Goal :
-The primary goal of  Daily Deeds app is to empower users to efficiently manage their daily tasks, track progress, and enhance productivity.
+# Deployment 1 : 
+[App_Link](https://todoapp-client-kcd5.onrender.com/)<br />
+DailyDeeds is deployed using a combination of services:<br />
+***Frontend:*** Hosted on Render.com for reliable and scalable hosting.<br />
+***Backend:*** Also hosted on Render.com for high availability and performance.<br />
+***Database:*** PostgreSQL is hosted on Vercel.com, offering a secure and scalable database hosting solution.<br />
 
-# Features :
-User Authentication: Allow users to register and log in securely to create their own accounts. User authentication ensures that each user has a personalized experience and can access their tasks privately. <br />
+# Deployment 2: 
+***GitHub Actions Workflow, Docker and AWS Deployment***<br />
 
-Task Management: Enable users to add, edit, and remove tasks from their to-do lists. <br />
+***GitHub Actions Workflow:*** A GitHub Actions workflow has been configured with two jobs:<br />
 
-Progress Tracking: Provide a feature for users to track the progress of their tasks. <br />
+Job 1 - Frontend and Backend Docker Images: This job has two steps:<br />
 
-User-Friendly Interface: Design an intuitive and user-friendly interface that makes it easy for users to navigate, add tasks, and monitor their progress. A well-designed UI contributes to a positive user experience.<br />
+   Step 1: Create a Docker image for the frontend using the provided Dockerfile and push it to Docker Hub.<br />
+   Step 2: Create a Docker image for the backend using the Dockerfile and push it to Docker Hub.<br />
 
-Responsive Design: Ensure that your app is responsive, adapting to different screen sizes and devices, making it accessible to users on various platforms, including desktop, tablet, and mobile.
+AWS Deployment: After the Docker images are pushed to Docker Hub, set up an AWS EC2 instance and deploy the app as follows:<br />
+
+Job 2 - Deploy to AWS EC2:<br />
+
+Step 1: Copy the provided Docker Compose file to your AWS EC2 instance.<br />
+Step 2: Run the app on AWS using Docker Compose. The Docker Compose file orchestrates the frontend, backend, database containers.
+
+# Demo:
+
+https://github.com/seyyednavid/Daily-Deeds-App/assets/100324062/ea686ae9-bf76-4ca6-8d86-01a7430f7191
+
+
+
+
+
+
+
