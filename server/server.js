@@ -11,7 +11,6 @@ const jwt = require("jsonwebtoken");
 
 // Get all todos
 app.get("/todos/:userEmail", async (req, res) => {
-  console.log("get");
   const { userEmail } = req.params;
   try {
     const getToDo = await pool.query(
