@@ -28,7 +28,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="whole-app">
+    <div className ="whole-app">
       <div className="app">
         {!authToken && <Auth />}
         {authToken && (
